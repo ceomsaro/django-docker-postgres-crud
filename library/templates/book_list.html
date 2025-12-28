@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="m-5 alert {{ message.tags }}" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<div class="d-flex mt-auto align-items-center justify-content-between m-5">
+  <div>
+    <h2 class="text-center m-5">Catálogo de Libros</h2>
+  </div>
+
+  <div>
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#formularioModal"
+    >
+      + Agregar Libro
+    </button>
+    <div
+      class="modal fade"
+      id="formularioModal"
+      tabindex="-1"
+      aria-labelledby="formularioModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="formularioModalLabel">Agregar Libro</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form method="post" action="books/add">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="title" class="form-label">Titulo:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="title"
+                  name="title"
+                  placeholder="Titulo"
+                  
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="author" class="form-label">Autor:</label>
+                <select class="form-select" id="author" name="author">
+                  {% for author in authors_list %}
+                  <option value="{{author.id}}">{{author.name}}</option>
+
+                  {% endfor %}
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="fecha" class="form-label"
+                  >Fecha de Publicacion:</label
+                >
+                <input
+                  type="date"
+                  class="form-control required"
+                  id="fecha"
+                  name="date"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="pages" class="form-label">Paginas:</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="pages"
+                  name="pages"
+                  placeholder="Paginas"
+                  
+                />
+              </div>
+
+              <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary text-center">
+                  Enviar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-10">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr class="table-dark">
+          <th scope="col">Título</th>
+          <th scope="col">Autor</th>
+          <th scope="col">Paginas</th>
+          <th scope="col">Fecha de Publicación</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for book in book_list %}
+        <tr>
+          <td>{{ book.title }}</td>
+          <td>{{ book.author.name }}</td>
+          <td>{{ book.page_numbers|default:"No disponible" }}</td>
+          <td>{{ book.published|default:"No disponible" }}</td>
+          <td class="text-center d-flex gap-3">
+            <form method="post" action="{% url 'detailsBooks' book.id %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-primary btn-md">
+                Editar
+              </button>
+            </form>
+
+            <form method="post" action="{% url 'deleteBook' book.id %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger btn-md">
+                Borrar
+              </button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

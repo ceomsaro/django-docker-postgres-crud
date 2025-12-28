@@ -1,0 +1,28 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center m-5">
+  <div class="card" style="width: 35rem;">
+    <div class="card-body">
+      <h5 class="card-title text-center">Editar Autor</h5>
+      <hr>
+      <form method="POST" action="{% url 'updateAuthors' %}">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{author.id}}"></input>
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="nombre" value="{{author.name}}" name="name">
+        </div>
+        <div class="mb-3">
+          <label for="fecha" class="form-label">Fecha</label>
+          <input type="date" class="form-control" id="fecha" name="date" value="{{ author.birthdate|date:'Y-m-d' }}">
+        </div>
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-warning">Actualizar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{%endblock%}

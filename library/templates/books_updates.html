@@ -1,0 +1,61 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container d-flex justify-content-center align-items-center m-5">
+  <div class="card" style="width: 35rem">
+    <div class="card-body">
+      <h5 class="card-title text-center">Editar Libro</h5>
+      <hr />
+      <form method="POST" action="{% url 'updateBooks' %}">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{book.id}}"></input>
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Titulo:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nombre"
+            value="{{book.title}}"
+            name="title"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="author" class="form-label">Autor:</label>
+          <select class="form-select" id="author" name="author">
+            {% for a in author %}
+            <option value="{{a.id}}">{{a.name}}</option>
+
+            {% endfor %}
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="fecha" class="form-label">Fecha de Publicacion:</label>
+          <input
+            type="date"
+            class="form-control"
+            id="fecha"
+            value="{{ book.published|date:'Y-m-d' }}"
+            name="published"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="pages" class="form-label">Paginas:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="pages"
+            name="pages"
+            placeholder="Paginas"
+            
+            value="{{book.page_numbers}}"
+          />
+        </div>
+
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-warning">Actualizar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{%endblock%}

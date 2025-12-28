@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- HERO -->
+<header class="hero py-5 text-white" style="background: linear-gradient(135deg, #6f42c1, #0d6efd);">
+  <div class="container text-center">
+    <span class="badge bg-light text-dark rounded-pill mb-3 shadow">CRUD Django</span>
+    <h1 class="display-4 fw-bold mb-3">📚 Bienvenido a tu Biblioteca</h1>
+    <p class="lead mb-4">
+      Administra tus <strong>libros</strong> y <strong>autores</strong> de forma sencilla, elegante y ordenada.
+    </p>
+    <a href="{% url 'getBooks' %}" class="btn btn-warning btn-lg me-2 shadow">Ver Libros</a>
+    <a href="{% url 'getAuthors' %}" class="btn btn-success btn-lg shadow">Ver Autores</a>
+  </div>
+</header>
+
+<!-- FEATURES -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="section-title h3 text-center fw-bold mb-5">✨ ¿Qué puedes hacer?</h2>
+    <div class="row g-4">
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card h-100 border-0 shadow-lg hover-shadow">
+          <div class="card-body text-center">
+            <i class="bi bi-bookmark-plus fs-1 mb-3 text-primary"></i>
+            <h5 class="card-title">Agregar libros</h5>
+            <p class="card-text">Crea registros con título, autor y fecha de publicación.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card h-100 border-0 shadow-lg">
+          <div class="card-body text-center">
+            <i class="bi bi-person-plus fs-1 mb-3 text-success"></i>
+            <h5 class="card-title">Agregar autores</h5>
+            <p class="card-text">Registra nuevos autores con nombre y biografía.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card h-100 border-0 shadow-lg">
+          <div class="card-body text-center">
+            <i class="bi bi-collection fs-1 mb-3 text-warning"></i>
+            <h5 class="card-title">Gestionar libros</h5>
+            <p class="card-text">Edita o elimina libros existentes fácilmente.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card h-100 border-0 shadow-lg">
+          <div class="card-body text-center">
+            <i class="bi bi-people fs-1 mb-3 text-danger"></i>
+            <h5 class="card-title">Gestionar autores</h5>
+            <p class="card-text">Mantén la información actualizada de tus autores.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-top py-4 bg-light">
+  <div class="container text-center small">
+    Hecho con <i class="bi bi-heart-fill text-danger"></i>, <i class="bi bi-lightning-charge text-warning"></i> y Django 🐍
+  </div>
+</footer>
+
+{% endblock %}
