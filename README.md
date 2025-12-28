@@ -1,5 +1,5 @@
 
-```md
+
 # 📚 Books CRUD — Django + Docker + PostgreSQL
 
 Aplicación CRUD desarrollada con **Django**, containerizada con **Docker** y orquestada con **Docker Compose**.  
